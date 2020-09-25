@@ -1,0 +1,6 @@
+{
+ "sourcefile" : "techniques.txt",
+    "logfile" : "aiki_reminder.log",
+    "template" : "email.tpl",
+ "debug" : 0
+}
