@@ -98,6 +98,6 @@ func main() {
 
 	tmpl.Execute(&body, data)
 	smtp.SendMail(fmt.Sprintf("%s:%d", configuration.Mailhost, configuration.Mailport), posteoAuth, configuration.Mailuser, []string{configuration.Email}, body.Bytes())
-	logger.Printf("Send email to '%s' with technique '%s'",configuration.Email, technique)
+	logger.Printf("Send email to '%s' with technique '%s'", configuration.Email, technique)
 	logger.Print("Ended...")
 }
