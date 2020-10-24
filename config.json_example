@@ -2,5 +2,10 @@
  "sourcefile" : "techniques.txt",
     "logfile" : "aiki_reminder.log",
     "template" : "email.tpl",
+    "mailhost" : "XXX",
+    "mailport" : 0,
+    "mailuser" : "XXX",
+    "mailpwd"  : "XXX",
+    "email"    : "XXX",
  "debug" : 0
 }

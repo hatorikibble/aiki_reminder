@@ -1,5 +1,32 @@
-shomen uchi ikkyo omote
-shomen uchi ikkyo ura
-katate dori nikkyo omote
-shomen uchi irimi nage
-shomen uchi shiho nage
+Shomen-uchi Ikkyo Omote zagi
+Shomen-uchi Ikkyo Ura zagi
+Shomen-uchi Ikkyo Omote tachi 
+Shomen-uchi Ikkyo Ura tachi
+Katadori Nikyo Omote
+Katadori Nikyo Ura
+Shomen-uchi Nikyo Omote zagi
+Shomen-uchi Nikyo Ura zagi
+Shomen-uchi Sankyo Omote zagi
+Shomen-uchi Sankyo Ura zagi
+Shomen-uchi Yonkyo Omote zagi
+Shomen-uchi Yonkyo Ura zagi
+Shomen-uchi Nikyo Omote tachi
+Shomen-uchi Nikyo Ura tachi
+Shomen-uchi Sankyo Omote tachi
+Shomen-uchi Sankyo Ura tachi
+Shomen-uchi Yonkyo Omote tachi
+Shomen-uchi Yonkyo Ura tachi
+Katatedori Shiho-nage Omote
+Yokomen-uchi Shiho-nage Omote
+Ryotedori Shiho-nage Omote
+Katatedori Shiho-nage Ura
+Yokomen-uchi Shiho-nage Ura
+Ryotedori Shiho-nage Ura
+Shomen-uchi Irimi-nage
+Jodan Tsuki Irimi-nage
+Chudan Tsuki Irimi-nage
+Shomen-Uchi Kote-gaeshi
+Jodan Tsuki Kote-gaeshi
+Chudan Tsuki Kote-gaeshi
+Ryote dori Tenchi-nage
+Kokyu-ho zagi

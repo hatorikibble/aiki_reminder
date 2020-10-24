@@ -1,27 +1,34 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"net/smtp"
 	"os"
 	"strings"
-        "text/template"
+	"text/template"
 	"time"
 )
 
 type Configuration struct {
-	Sourcefile                  string
-	Logfile                     string
-	Template                    string
-	Sleep_time_in_hours         int
-	Debug                       int
+	Sourcefile          string
+	Logfile             string
+	Template            string
+	Sleep_time_in_hours int
+	Mailhost            string
+	Mailport            int
+	Mailuser            string
+	Mailpwd             string
+	Email               string
+	Debug               int
 }
 
 type TemplateData struct {
-    Technique string
+	Technique string
 }
 
 var logfile *os.File
@@ -30,7 +37,6 @@ var logger *log.Logger
 var techniques []string
 var num_techniques int
 var configuration Configuration
-
 
 // init opens a log file, reads the techniques file
 // and creates a new random seed
@@ -57,8 +63,6 @@ func init() {
 	check(err)
 	techniques = strings.Split(string(content), "\n")
 
-
-	
 	num_techniques = len(techniques) - 1
 	logger.Printf("Found %d elements in %s\n", num_techniques, configuration.Sourcefile)
 
@@ -71,17 +75,29 @@ func check(e error) {
 	}
 }
 
-func main(){
-	fmt.Println(techniques[rand.Intn(num_techniques)])
+func main() {
 
-		// read template
+	technique := techniques[rand.Intn(num_techniques)]
+
+	// read template
 	tmpl, err := template.ParseFiles(configuration.Template)
-        check(err)
-	
-	   data := TemplateData{
-            Technique: techniques[rand.Intn(num_techniques)],         
-	   }
-	
-        tmpl.Execute(os.Stdout, data)
+	check(err)
+
+	data := TemplateData{
+		Technique: technique,
+	}
+
+	//sending email
+	var body bytes.Buffer
+	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n"
+	subject := fmt.Sprintf("Subject: Aikido-Erinnerung: %s\n", technique)
+	to := fmt.Sprintf("To: %s\n", configuration.Email)
+
+	body.Write([]byte(mime + to + subject + "\n\n"))
+	posteoAuth := smtp.PlainAuth("", configuration.Mailuser, configuration.Mailpwd, configuration.Mailhost)
+
+	tmpl.Execute(&body, data)
+	smtp.SendMail(fmt.Sprintf("%s:%d", configuration.Mailhost, configuration.Mailport), posteoAuth, configuration.Mailuser, []string{configuration.Email}, body.Bytes())
+	logger.Printf("Send email to '%s' with technique '%s'",configuration.Email, technique)
 	logger.Print("Ended...")
 }
