@@ -92,12 +92,19 @@ func main() {
 	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n"
 	subject := fmt.Sprintf("Subject: Aikido-Erinnerung: %s\n", technique)
 	to := fmt.Sprintf("To: %s\n", configuration.Email)
+	from := fmt.Sprintf("From: %s\n", configuration.Email)
 
-	body.Write([]byte(mime + to + subject + "\n\n"))
+	body.Write([]byte(mime + from + to + subject + "\n\n"))
 	posteoAuth := smtp.PlainAuth("", configuration.Mailuser, configuration.Mailpwd, configuration.Mailhost)
 
 	tmpl.Execute(&body, data)
-	smtp.SendMail(fmt.Sprintf("%s:%d", configuration.Mailhost, configuration.Mailport), posteoAuth, configuration.Mailuser, []string{configuration.Email}, body.Bytes())
-	logger.Printf("Send email to '%s' with technique '%s'", configuration.Email, technique)
+
+	err = smtp.SendMail(fmt.Sprintf("%s:%d", configuration.Mailhost, configuration.Mailport), posteoAuth, configuration.Mailuser, []string{configuration.Email}, body.Bytes())
+
+	if err != nil {
+		logger.Printf("Error SendMail: ", err)
+	} else {
+		logger.Printf("Send email to '%s' with technique '%s'", configuration.Email, technique)
+	}
 	logger.Print("Ended...")
 }
