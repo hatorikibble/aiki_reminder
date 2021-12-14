@@ -102,7 +102,7 @@ func main() {
 	err = smtp.SendMail(fmt.Sprintf("%s:%d", configuration.Mailhost, configuration.Mailport), posteoAuth, configuration.Mailuser, []string{configuration.Email}, body.Bytes())
 
 	if err != nil {
-		logger.Printf("Error SendMail: ", err)
+		logger.Printf("Error SendMail: %s", err)
 	} else {
 		logger.Printf("Send email to '%s' with technique '%s'", configuration.Email, technique)
 	}
